@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background: white;
+        color:#CCCCCC; 
+      }
+      #c1 {
+        background: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="text-align: center">
+      <canvas id="c1" width="1000" height="1000"></canvas>
+    </div>
+  <script type="text/javascript">
+
+    const canvas = document.getElementById('c1');
+    const ctx = canvas.getContext('2d');
+    
+    const fontSize = 24;
+    const d = 29;
+    const r = d/2;
+
+    const extraOff = 18;
+
+    const blocks = [
+      {
+        hash: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f',
+        title: 'Genesis -- 50.00000000 BTC'
+      },
+      {
+        hash: '000000000000048b95347e83192f69cf0366076336c639f9b7228e9ba171342e',
+        title: '210,000 -- 38.56295554 BTC'
+      },
+      {
+        hash: '000000000000000002cce816c0ab2c5c269cb081896b7dcb34b8422d6b74ffa1',
+        title: '420,000 -- 13.07569681 BTC'
+      },
+      {
+        hash: '000000000000000000024bead8df69990852c202db0e0097c1a12ea637d7e96d',
+        title: '630,000 --  7.15968084 BTC'
+      }
+    ];
+
+    drawBlock(blocks[0], 0, 0);
+    drawBlock(blocks[1], d * 17, 0);
+    drawBlock(blocks[2], 0, d * 17);
+    drawBlock(blocks[3], d * 17, d* 17);
+
+    function drawBlock(block, offX, offY) {
+      offX += extraOff;
+      offY += extraOff;
+      const hash = block.hash;
+      const color1 = '#' + hash.slice(-6);
+      const color0 = '#' + hash.slice(-12, -6);
+
+      for (let y = 0; y < 16 ; y++) {
+        const row = hash.slice(y * 4, (y * 4) + 4);
+        const bits = parseInt(row, 16).toString(2);
+        const fill = '0000000000000000';
+        const pattern = fill.slice(bits.length) + bits;
+
+        for (let x = 0; x < 16; x++) {
+          const bit = pattern[x];
+          ctx.beginPath();
+          ctx.fillStyle = parseInt(bit) ? color1 : color0;
+          ctx.arc(
+            (x + 1) * d - r + offX,
+            (y + 1) * d - r + offY,
+            r,
+            0,
+            2 * Math.PI
+          );
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold ' + String(fontSize) + 'px Courier';
+      ctx.fillText(
+        block.title,
+        20 + offX,
+        (16.7 * d) + offY
+      );
+    }
+
+
+  </script>
+  </body>
+</html>
