@@ -25,7 +25,8 @@
     const d = 29;
     const r = d/2;
 
-    const extraOff = 18;
+    const extraOffX = 22;
+    const extraOffY = 14;
 
     const blocks = [
       {
@@ -52,8 +53,8 @@
     drawBlock(blocks[3], d * 17, d* 17);
 
     function drawBlock(block, offX, offY) {
-      offX += extraOff;
-      offY += extraOff;
+      offX += extraOffX;
+      offY += extraOffY;
       const hash = block.hash;
       const color1 = '#' + hash.slice(-6);
       const color0 = '#' + hash.slice(-12, -6);
@@ -83,7 +84,7 @@
       ctx.font = 'bold ' + String(fontSize) + 'px Courier';
       ctx.fillText(
         block.title,
-        20 + offX,
+        42 + offX,
         (16.7 * d) + offY
       );
     }
