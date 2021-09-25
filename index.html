@@ -14,15 +14,18 @@
 
   <body>
     <div style="text-align: center">
-      <canvas id="c1" width="1000" height="1000"></canvas>
+      <canvas id="c1" width="970" height="1000"></canvas>
     </div>
   <script type="text/javascript">
 
     const canvas = document.getElementById('c1');
     const ctx = canvas.getContext('2d');
     
-    const fontSize = 24;
-    const d = 29;
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0,0,990,1000);
+
+    const fontSize = 50;
+    const d = 58;
     const r = d/2;
 
     const extraOffX = 22;
@@ -30,27 +33,12 @@
 
     const blocks = [
       {
-        hash: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f',
-        title: 'Genesis -- 50.00000000 BTC'
-      },
-      {
-        hash: '000000000000048b95347e83192f69cf0366076336c639f9b7228e9ba171342e',
-        title: '210,000 -- 38.56295554 BTC'
-      },
-      {
-        hash: '000000000000000002cce816c0ab2c5c269cb081896b7dcb34b8422d6b74ffa1',
-        title: '420,000 -- 13.07569681 BTC'
-      },
-      {
-        hash: '000000000000000000024bead8df69990852c202db0e0097c1a12ea637d7e96d',
-        title: '630,000 --  7.15968084 BTC'
+        hash: '00000000000000000277587382eea17aa046e1733cd7b75aa8acc6b9b7b5d868',
+        title: ' 434,102    12.93247052 BTC'
       }
     ];
 
     drawBlock(blocks[0], 0, 0);
-    drawBlock(blocks[1], d * 17, 0);
-    drawBlock(blocks[2], 0, d * 17);
-    drawBlock(blocks[3], d * 17, d* 17);
 
     function drawBlock(block, offX, offY) {
       offX += extraOffX;
